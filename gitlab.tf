@@ -50,7 +50,7 @@ resource "aws_eip_association" "this" {
 
 resource "null_resource" "gitlab-install" {
   provisioner "file" {
-    source = "~/setup-gitlab.sh"
+    source = "./setup-gitlab.sh"
     destination = "~/setup-gitlab.sh"
   }
 
