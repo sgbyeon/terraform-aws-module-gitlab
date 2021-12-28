@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "this" {
-  for_each = toset(var.s3_for_gitlab)
-  bucket = each.value
+  for_each = toset([var.s3_for_gitlab])
+  bucket = each.key
   acl = "private"
   tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.%s.s3", var.prefix, var.vpc_name, each.key)}))
 }
