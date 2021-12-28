@@ -101,6 +101,26 @@ variable "tags" {
 }
 
 variable "s3_for_gitlab" {
-  description = "A map of s3 bucket list"
+  description = "s3 bucket list"
   type = list(string)
+}
+
+variable "bastion_host" {
+  description = "bastion host for connection to host"
+  type = string
+}
+
+variable "bastion_private_key" {
+  description = "The contents of an SSH key file to use for the bastion host"
+  type = string
+}
+
+variable "bastion_port" {
+  description = "The port to use connect to the bastion host"
+  type = string
+}
+
+variable "bastion_user" {
+  description = "The user for the connection to the bastion host"
+  type = string
 }

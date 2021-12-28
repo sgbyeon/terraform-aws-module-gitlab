@@ -67,6 +67,10 @@ resource "null_resource" "gitlab-install" {
     password = ""
     private_key = file(var.key_path)
     host = aws_eip.this.public_ip
+    bastion_host = var.bastion_host
+    bastion_private_key = var.bastion_private_key
+    bastion_port = var.bastion_port
+    bastion_user = var.bastion_user
   }
 
   depends_on = [
