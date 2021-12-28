@@ -110,6 +110,11 @@ variable "bastion_host" {
   type = string
 }
 
+variable "bastion_host_key" {
+  description = "The public key from the remote host"
+  type = string
+}
+
 variable "bastion_private_key" {
   description = "The contents of an SSH key file to use for the bastion host"
   type = string

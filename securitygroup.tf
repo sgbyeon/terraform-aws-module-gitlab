@@ -1,5 +1,5 @@
 resource "aws_security_group" "this" {
-  name = "${var.prefix}-${var.vpc_name}-gitlab-sg"
+  name = "${var.prefix}.${var.vpc_name}.gitlab.security-groups"
   description = "${var.prefix}-${var.vpc_name} gitlab security group"
   vpc_id = var.vpc_id
   egress {
