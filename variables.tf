@@ -79,8 +79,8 @@ variable "kms_arn_ebs" {
 
 variable "gitlab_ingress_sg_rule" {
   description = "Ingress Security Group rule for gitlab"
-  type        = list(string)
-  default     = []
+  type = list(string)
+  default = []
 }
 
 variable "subnet_id" {
@@ -102,5 +102,5 @@ variable "tags" {
 
 variable "s3_for_gitlab" {
   description = "A map of s3 bucket list"
-  type = map(string)
+  type = list(string)
 }
