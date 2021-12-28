@@ -8,7 +8,7 @@ resource "aws_security_group" "this" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  tags = merge(var.tags, tomap({Name = format("%s-%s-gitlab-sg", var.prefix, var.vpc_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.security-groups", var.prefix, var.vpc_name)}))
 }
 
 resource "aws_security_group_rule" "this" {

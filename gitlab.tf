@@ -1,7 +1,7 @@
 resource "aws_eip" "this" {
   vpc = true
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-gitlab-eip", var.prefix, var.vpc_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.eip", var.prefix, var.vpc_name)}))
 }
 
 resource "aws_instance" "this" {
@@ -33,14 +33,14 @@ resource "aws_instance" "this" {
     cpu_credits = "standard"
   }
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-gitlab-ec2", var.prefix, var.vpc_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab", var.prefix, var.vpc_name)}))
 }
 
 resource "aws_network_interface" "this" {
   description = "NIC eth0 for ${var.vpc_name}-gitlab"
   subnet_id = var.subnet_id
   security_groups = [aws_security_group.this.id]
-  tags = merge(var.tags, tomap({Name = format("%s-%s-gitlab-nic", var.prefix, var.vpc_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.nic", var.prefix, var.vpc_name)}))
 }
 
 resource "aws_eip_association" "this" {
