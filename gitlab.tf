@@ -40,13 +40,13 @@ resource "aws_network_interface" "this" {
 resource "null_resource" "gitlab-install" {
   provisioner "file" {
     source = "./setup-gitlab.sh"
-    destination = "setup-gitlab.sh"
+    destination = "/home/ec2-user/setup-gitlab.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 700 setup-gitlab.sh",
-      "sudo setup-gitlab.sh"
+      "chmod 700 /home/ec2-user/setup-gitlab.sh",
+      "sudo /home/ec2-user/setup-gitlab.sh"
     ]
   }
 
