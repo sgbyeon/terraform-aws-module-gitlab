@@ -43,6 +43,11 @@ resource "null_resource" "gitlab-install" {
     destination = "setup-gitlab.sh"
   }
 
+  provisioner "file" {
+    source = "docker-compose.yaml"
+    destination = "docker-compose.yaml"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "chmod 700 /home/ec2-user/setup-gitlab.sh",
