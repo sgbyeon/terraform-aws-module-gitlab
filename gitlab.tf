@@ -39,8 +39,8 @@ resource "aws_network_interface" "this" {
 
 resource "null_resource" "gitlab-install" {
   provisioner "file" {
-    source = "./setup-gitlab.sh"
-    destination = "/home/ec2-user/setup-gitlab.sh"
+    source = "setup-gitlab.sh"
+    destination = "setup-gitlab.sh"
   }
 
   provisioner "remote-exec" {
