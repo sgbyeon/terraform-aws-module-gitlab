@@ -1,9 +1,3 @@
-resource "aws_eip" "this" {
-  vpc = true
-
-  tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.eip", var.prefix, var.vpc_name)}))
-}
-
 resource "aws_instance" "this" {
   ami = var.ami_id
   instance_type = var.instance_type
@@ -43,11 +37,6 @@ resource "aws_network_interface" "this" {
   tags = merge(var.tags, tomap({Name = format("%s.%s.gitlab.nic", var.prefix, var.vpc_name)}))
 }
 
-resource "aws_eip_association" "this" {
-  instance_id = aws_instance.this.id
-  allocation_id = aws_eip.this.id
-}
-
 resource "null_resource" "gitlab-install" {
   provisioner "file" {
     source = "./setup-gitlab.sh"
@@ -66,16 +55,15 @@ resource "null_resource" "gitlab-install" {
     user = "ec2-user"
     password = ""
     private_key = file(var.key_path)
-    host = aws_eip.this.public_ip
+    host = aws_instance.this.private_ip
     bastion_host = var.bastion_host
-    bastion_host_key = file(var.bastion_host_key)
+    #bastion_host_key = file(var.bastion_host_key)
     bastion_private_key = file(var.bastion_private_key)
     bastion_port = var.bastion_port
     bastion_user = var.bastion_user
   }
 
   depends_on = [
-    aws_eip_association.this,
     aws_s3_bucket.this
   ]
 }
